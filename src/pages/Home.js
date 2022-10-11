@@ -1,34 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { WEATHER_APP_API_KEY } from '../API_KEYS';
-// URL for accessing OpenWeatherAPI with Query Params
-const openWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=Orlando&appid=${WEATHER_APP_API_KEY}`;
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { useSearchParams } from 'react-router-dom';
+import { WEATHER_APP_API_KEY } from "../API_KEYS";
+import WeatherCard from "../components/WeatherCard";
+import Header from '../components/Header';
 
 function Home() {
     // Value stored in state for weather data
     const [weatherData, setWeatherData] = useState({});
- 
-useEffect(() => {
-// Query OpenWeatherAPI for weather data
-// Make request to OpenWeather based on city
-    axios
-    .get(openWeatherURL)
-    .then(function(response) {
-        setWeatherData(response.data);
-    })
-    .catch(function(error) {
-        console.warn(error);
-        setWeatherData({});
-    });
-}, []);
+    const [city, setCity] = useState("Orlando");
+    const [searchParams] = useSearchParams();
 
-    console.log("state value", weatherData);
+    useEffect(() => {
+        const cityToQuery = searchParams.get("city") || city;
+        setCity(cityToQuery);
+        // Query OpenWeatherAPI for weather data
+        // Make request to OpenWeather based on city
+        axios
+            .get(
+                `https://api.openweathermap.org/data/2.5/weather?q=${cityToQuery}&appid=${WEATHER_APP_API_KEY}`
+            )
+            .then(function(response) {
+            setWeatherData(response.data);
+        })
+        .catch(function(error) {
+            console.warn(error);
+            setWeatherData({});
+        });
+    }, []);
+
+    const {
+        cloudiness,
+        currentTemp, 
+        humidity 
+    } = useMemo(() => {
+        const weatherMain = weatherData.main || {};
+        return {
+            humidity: weatherMain.humidity,
+        };
+    }, [weatherData]);
 
     return (
         <div>
+            <Header/>
             <h1>Weather App</h1>
-            <h2>{weatherData.name}</h2>
-            <p>Humidity: {weatherData.main && weatherData.main.humidity}%</p>
+            <WeatherCard 
+            city={city} 
+            humidity={humidity} 
+            />
         </div>
     );
 }
