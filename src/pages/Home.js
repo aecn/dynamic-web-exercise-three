@@ -47,13 +47,13 @@ function Home() {
             highTemp: Math.round(weatherMain.temp_max),
             humidity: weatherMain.humidity,
             lowTemp: Math.round(weatherMain.temp_min),
-            weatherType: weatherData.weather && weatherData[0],
+            weatherType: weatherData.weather && weatherData.weather[0].main,
             windSpeed: weatherData.wind && weatherData.wind.speed,
         };
     }, [weatherData]);
 
-    return (
-        <div>
+    return ( // think of creative way to display BG color
+        <div>  
             <Header />
             <h1>Weather App</h1>
             <WeatherCard 
