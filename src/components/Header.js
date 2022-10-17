@@ -3,10 +3,10 @@ import React from 'react';
 function Header() {
     return (
         <header>
-            <a href="/?city=Athens">Athens</a>
-            <a href="/?city=Paris">Paris</a>
-            <a href="/?city=Taipei">Taipei</a>
-            <a href="/?city=Sydney">Sydney</a>
+            <a href="/?city=ATHENS">ATHENS</a>
+            <a href="/?city=PARIS">PARIS</a>
+            <a href="/?city=TAIPEI">TAIPEI</a>
+            <a href="/?city=SYDNEY">SYDNEY</a>
         </header>
     )
 

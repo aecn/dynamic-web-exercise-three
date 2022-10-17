@@ -53,10 +53,10 @@ function Home() {
     }, [weatherData]);
 
     return ( // display BG color based on cloudiness
-        <div style={{backgroundColor: `rgba(186, 231, 247, ${cloudiness / 100})`}}>
+        <div className="background=color" style={{backgroundColor: `rgba(186, 231, 247, ${cloudiness / 100})`}}>
             <div className="weather-wrapper">  
-                <Header />
-                <h1>Weather App</h1>
+                <Header 
+                />
                 <WeatherCard 
                 city={city}
                 cloudiness={cloudiness}

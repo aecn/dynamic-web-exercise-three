@@ -14,17 +14,21 @@ function weatherCard({
 }) {
     return (
         <div className="weatherCard">
-        <h2>{city}</h2>
-        <div className="weatherCard-weatherType">
-            <WeatherIcon weatherType ={weatherType} />
-            <p className="WeatherCard-type">{weatherType}</p>
+            <div className="main-info">
+            <h2>{city}</h2>
+            <p className="WeatherCard-currentTemp">{currentTemp}&deg;F</p>
+            <div className="weatherCard-weatherType">
+                <WeatherIcon weatherType ={weatherType} />
+                <p className="WeatherCard-type">{weatherType}</p>
+            </div>
         </div>
-        <p>Current: {currentTemp}&deg;F</p>
-        <p>High: {highTemp}&deg;F</p>
-        <p>Low: {lowTemp}&deg;F</p>
-        <p>Cloudiness: {cloudiness}%</p>
-        <p>Humidity: {humidity}%</p>
-        <p>Wind: {windSpeed} mph</p>
+            <div className="extra-info">
+                <p>HIGH: {highTemp}&deg;F</p>
+                <p>LOW: {lowTemp}&deg;F</p>
+                <p>Cloudiness: {cloudiness}%</p>
+                <p>Humidity: {humidity}%</p>
+                <p>Wind: {windSpeed} mph</p>
+            </div>
         </div>
     );
 }
