@@ -52,20 +52,22 @@ function Home() {
         };
     }, [weatherData]);
 
-    return ( // think of creative way to display BG color
-        <div>  
-            <Header />
-            <h1>Weather App</h1>
-            <WeatherCard 
-            city={city}
-            cloudiness={cloudiness}
-            currentTemp={currentTemp}
-            highTemp={highTemp} 
-            humidity={humidity}
-            lowTemp={lowTemp} 
-            weatherType={weatherType}
-            windSpeed={windSpeed}
-            />
+    return ( // display BG color based on cloudiness
+        <div style={{backgroundColor: `rgba(186, 231, 247, ${cloudiness / 100})`}}>
+            <div className="weather-wrapper">  
+                <Header />
+                <h1>Weather App</h1>
+                <WeatherCard 
+                city={city}
+                cloudiness={cloudiness}
+                currentTemp={currentTemp}
+                highTemp={highTemp} 
+                humidity={humidity}
+                lowTemp={lowTemp} 
+                weatherType={weatherType}
+                windSpeed={windSpeed}
+                />
+            </div>
         </div>
     );
 }
